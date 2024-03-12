@@ -67,7 +67,6 @@
                     <p>Wasserwerk Frelberg, Germany</p>
                         <div class="rating">
                           <i class="ri-thumb-up-line"></i> 4.2
-                          <i class="ri-chat-3-line"></i> 4.2
                         </div>
                 </div>
             </div>

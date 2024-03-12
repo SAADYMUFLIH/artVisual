@@ -1,33 +1,46 @@
-<div class="nav__logo">ArtVisualGalery<span>.</span></div>
-<ul class="nav__links">
-    <li class="link"><a href="#">Home</a></li>
-    <li class="link"><a href="#">Explore</a></li>
-    <li class="link"><a href="#">Pricing</a></li>
-    <li class="link"><a href="#">Reviews</a></li>
-</ul>
-<span>
-  @if (Auth::user())
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Selamat datang, {{ Auth::user()->username }}
-    </button>
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <p class="dropdown-item-text">Selamat datang, {{ Auth::user()->username }}</p>
-                </div>
-                <div class="col">
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-link">Logout</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <div class="nav__logo">ArtVisualGalery<span>.</span></div>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav mx-auto"> <!-- mx-auto untuk menu berada di tengah -->
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Explore</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Reviews</a>
+        </li>
+      </ul>
     </div>
-</div>
-  @else
-      <a type="button" href="{{ route('login') }}" onclick="window.location.href='{{ route('login') }}'" class="btn login">Login</a>
-  @endif
-</span>
+    <ul class="navbar-nav ms-auto">
+      @if (Auth::user())
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-blue" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="text-center">
+            <p style="display: inline; color: #3685fb;">Haloo</p>, {{ Auth::user()->username }}
+          </span>
+        </a>        
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <form action="{{ route('logout') }}" method="POST">
+              @csrf
+              <button type="submit" class="dropdown-item">Logout</button>
+            </form>
+          </li>
+        </ul>
+      </li>
+      @else
+      <li class="nav-item">
+        <button class="btn btn-primary" onclick="window.location.href='{{ route('login') }}'">Login</button>
+      </li>      
+      @endif
+    </ul>
+  </div>
+</nav>

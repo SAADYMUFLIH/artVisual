@@ -12,8 +12,6 @@
                 agency and we are providing the best travel services for our
                 clients.
             </p>
-
-            
         </div>
     </div>
 </div>
