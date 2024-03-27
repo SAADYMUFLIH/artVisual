@@ -20,6 +20,7 @@
   max-width: var(--max-width);
   margin: auto;
   padding: 5rem 1rem;
+  position: relative;
 }
 
 .section__header {
@@ -32,20 +33,9 @@
   margin-top: 50px;
 }
 
-.section__title {
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--text-dark);
-  margin-bottom: 1rem;
-}
 
-.section__subtitle {
-  font-size: 1rem;
-  color: var(--text-dark);
-  max-width: calc(var(--max-width) / 2);
-}
 
-.btn {
+.btnn {
   padding: 0.50rem 1.5rem;
   outline: none;
   border: none;
@@ -55,33 +45,33 @@
   transition: 0.3s;
 }
 
-.btn {
+.btnn {
   background-color: var(--primary-color);
-  border-radius: 5rem;
+  border-radius: 5px;
 }
 
-.btn.login {
+.btnn.login {
   background-color: white; /* Mengubah warna latar belakang saat hover */
   color: var(--primary-color); /* Mengubah warna teks saat hover */
   border: 1px solid var(--primary-color); /* Menambah border pada tombol Registrasi */
   border-radius: 20px; /* Menambah border radius pada tombol Login */
 }
 
-.btn.login:hover {
+.btnn.login:hover {
   background-color: var(--primary-color); /* Mengubah warna latar belakang saat hover */
   color: var(--extra-light); /* Mengubah warna teks saat hover */
   border-radius: 20px; 
 }
 
 
-.btn.register {
+.btnn.register {
   background-color: white;
   color: var(--primary-color);
   border: 1px solid var(--primary-color); /* Menambah border pada tombol Registrasi */
   border-radius: 20px; 
 }
 
-.btn.register:hover {
+.btnn.register:hover {
   background-color: var(--primary-color); /* Mengubah warna latar belakang saat hover */
   color: var(--extra-light); /* Mengubah warna teks saat hover */
   border-radius: 20px; /
@@ -142,6 +132,50 @@ nav {
   color: var(--primary-color);
 }
 
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu when image is clicked */
+.dropdown.active .dropdown-content {
+  display: block;
+}
+
+/* Styling for user profile */
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.profile-pic {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; /* membuat gambar bulat */
+  margin-right: 10px;
+}
+
+.username {
+  margin-right: 10px;
+}
 
 
 header {

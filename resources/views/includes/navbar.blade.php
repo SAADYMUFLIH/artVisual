@@ -1,46 +1,50 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <div class="nav__logo">ArtVisualGalery<span>.</span></div>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav mx-auto"> <!-- mx-auto untuk menu berada di tengah -->
-        <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Explore</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Reviews</a>
-        </li>
-      </ul>
+<div class="container-fluid" style="margin-top: 25px;">
+    <div class="nav__logo">ArtVisualGallery<span>.</span></div>
+    <div class="collapse navbar-collapse justify-content-center">
+        <ul class="navbar-nav mx-auto justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('home') }}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('explore') }}">Explore</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Upload</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Profile</a>
+            </li>
+          </ul>
     </div>
     <ul class="navbar-nav ms-auto">
-      @if (Auth::user())
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-blue" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <span class="text-center">
-            <p style="display: inline; color: #3685fb;">Haloo</p>, {{ Auth::user()->username }}
-          </span>
-        </a>        
-        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-          <li><a class="dropdown-item" href="#">Profile</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li>
-            <form action="{{ route('logout') }}" method="POST">
-              @csrf
-              <button type="submit" class="dropdown-item">Logout</button>
-            </form>
-          </li>
-        </ul>
-      </li>
-      @else
-      <li class="nav-item">
-        <button class="btn btn-primary" onclick="window.location.href='{{ route('login') }}'">Login</button>
-      </li>      
-      @endif
+        @if (Auth::user())
+        <a onclick="confirmLogout()" class="dropdown-item">Logout</a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+        @else
+        <li class="nav-item">
+            <button class="btn btn-primary" onclick="window.location.href='{{ route('login') }}'">Login</button>
+        </li>
+        @endif
     </ul>
-  </div>
-</nav>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmLogout() {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You will be logged out.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, logout!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('logout-form').submit();
+            }
+        });
+    }
+</script>

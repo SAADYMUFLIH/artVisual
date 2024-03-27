@@ -1,6 +1,6 @@
 <div class="section__container footer__container">
     <div class="footer__col">
-        <h3>Pathway<span>.</span></h3>
+        <h3>ArtVisualGalery<span>.</span></h3>
         <p>
             Explore your suitable and dream places around the world. Here you
             can find your right destination.
@@ -19,7 +19,7 @@
             <span>Address:</span> 280 Wilson Street, Cima, California, 92323,
             United States
         </p>
-        <p><span>Email:</span> info@pathway.com</p>
+        <p><span>Email:</span> info@ArtVisualGalery.com</p>
         <p><span>Phone:</span> +91 9876543210</p>
     </div>
 </div>

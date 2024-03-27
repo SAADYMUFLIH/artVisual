@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExploreController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,7 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'registerStore'])->name('registerPost');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/explore', [ExploreController::class, 'index_explore'])->name('explore');
+
+

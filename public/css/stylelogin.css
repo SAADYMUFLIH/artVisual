@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #3685fb; /* Warna latar belakang keseluruhan halaman */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-form {
+    max-width: 400px;
+    margin: 100px auto 0; /* Menyesuaikan margin atas */
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+
+  .registration-form {
+    max-width: 400px;
+    margin: 50px auto 0; /* Menyesuaikan margin atas */
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+
+  /* Pastikan file CSS Anda memuat gaya untuk class .form-control dan .rounded. */
+.form-control {
+    border-radius: 15px; /* Ubah border radius sesuai kebutuhan Anda */
+    border: 1px solid #ced4da; /* Tambahkan garis tepi */
+    padding: 10px; /* Tambahkan padding untuk memberikan ruang antara konten dan tepi input */
+    width: 100%; /* Sesuaikan lebar input */
+}
+
+.rounded {
+    border-radius: 15px; /* Ubah border radius sesuai kebutuhan Anda */
+}
+
+/* Gaya untuk tombol */
+.btn {
+    border-radius: 15px; /* Ubah border radius sesuai kebutuhan Anda */
+}
+
+.btn-primary {
+    background-color: #3498db; /* Warna latar belakang tombol */
+    border-color: #3498db; /* Warna garis tepi tombol */
+    color: #fff; /* Warna teks tombol */
+}
+
+.btn-primary:hover {
+    background-color: #2980b9; /* Warna latar belakang tombol saat dihover */
+    border-color: #2980b9; /* Warna garis tepi tombol saat dihover */
+    color: #fff; /* Warna teks tombol saat dihover */
+}

@@ -6,15 +6,31 @@
     @include('includes.navbar')
 @endsection
 
-@section('header')
-    @include('includes.header')
-@endsection
 
 @section('content')
+
+<div class="section__container header__container">
+    <div class="header__image">
+        <img src="assets/header-1.jpg" alt="header" />
+        <img src="assets/header-2.jpg" alt="header" />
+    </div>
+    <div class="header__content">
+        <div>
+            <p class="sub__header">ArtVisual</p>
+            <h1>ArtVisualGallery</h1>
+            <p class="section__subtitle">
+                    Make your explore more enjoyable with us. We are the best travel
+                    agency and we are providing the best travel services for our
+                    clients.
+            </p>
+        </div>
+    </div>
+</div>
+
 <section class="section__container destination__container">
     <div class="section__header">
         <div>
-            <h2 class="section__title">Explore top destinations</h2>
+            <h2 class="section__title">Best Photo</h2>
             <p class="section__subtitle">
                 Explore your suitable and dream places around the world. Here you
                 can find your right destination.
@@ -108,9 +124,6 @@
                 </div>
             </div>
         </div>
-        <div class="view__all">
-            <button class="btn">View All</button>
-        </div>
     </div>
 </section>
 
@@ -134,29 +147,14 @@
                     Explore your suitable and dream places around the world. Here you
                     can find your right destination.
                 </p>
-                <button class="btn">View All</button>
             </div>
         </div>
     </div>
 </section>
 
-<section class="subscribe">
-    <div class="section__container subscribe__container">
-        <div class="subscribe__content">
-            <h2 class="section__title">Subscribe to get special prize</h2>
-            <p class="section__subtitle">
-                Explore your suitable and dream places around the world. Here you
-                can find your right destination.
-            </p>
-        </div>
-        <div class="subscribe__form">
-            <form>
-                <input type="email" placeholder="Your email here" />
-                <button class="btn" type="submit">Send</button>
-            </form>
-        </div>
-    </div>
-</section>
+
+
+
 @endsection
 
 @section('footer')
