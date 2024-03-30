@@ -1,6 +1,6 @@
 <div class="container-fluid" style="margin-top: 25px;">
     <div class="nav__logo">ArtVisualGallery<span>.</span></div>
-    <div class="collapse navbar-collapse justify-content-center">
+    <div style="margin-left: 27%; margin-right: auto;"> <!-- Menambahkan properti style untuk membuat elemen menjadi terpusat secara horizontal -->
         <ul class="navbar-nav mx-auto justify-content-center">
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('home') }}">Home</a>
@@ -9,16 +9,23 @@
                 <a class="nav-link" href="{{ route('explore') }}">Explore</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Upload</a>
+                <a class="nav-link" href="{{ route('upload') }}">Upload</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Profile</a>
-            </li>
-          </ul>
+        </ul>
     </div>
-    <ul class="navbar-nav ms-auto">
+      
+    <ul class="navbar-nav ms-auto" style="margin-right: 20px;">
         @if (Auth::user())
-        <a onclick="confirmLogout()" class="dropdown-item">Logout</a>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" onclick="openDropdown()">
+                {{ Auth::user()->username }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" onclick="confirmLogout()">Logout</a></li>
+            </ul>
+          </li>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
@@ -30,6 +37,7 @@
     </ul>
 </div>
 
+@section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function confirmLogout() {
@@ -47,4 +55,9 @@
             }
         });
     }
+
+    function openDropdown() {
+     document.getElementById("navbarDropdown").classList.toggle("show");
+    }
 </script>
+@endsection

@@ -3,8 +3,11 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExploreController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +30,14 @@ Route::post('/register', [AuthController::class, 'registerStore'])->name('regist
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+
+//explore
 Route::get('/explore', [ExploreController::class, 'index_explore'])->name('explore');
+
+//upload
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/upload', [UploadController::class, 'index_upload'])->name('upload');
+    Route::get('/profile', [ProfileController::class, 'index_profile'])->name('profile');
+});
 
 
