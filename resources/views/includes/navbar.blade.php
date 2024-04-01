@@ -18,7 +18,7 @@
         @if (Auth::user())
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" onclick="openDropdown()">
-                {{ Auth::user()->username }}
+                <p style="color: blue">Halloo</p>,{{ Auth::user()->username }}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
