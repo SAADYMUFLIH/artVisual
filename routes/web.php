@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExploreController;
@@ -30,14 +31,22 @@ Route::post('/register', [AuthController::class, 'registerStore'])->name('regist
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
 //explore
 Route::get('/explore', [ExploreController::class, 'index_explore'])->name('explore');
 
 //upload
 Route::group(['middleware' => 'auth'], function() {
+    //upload
     Route::get('/upload', [UploadController::class, 'index_upload'])->name('upload');
+
+    //profile
     Route::get('/profile', [ProfileController::class, 'index_profile'])->name('profile');
+    Route::get('/editprofile', [ProfileController::class, 'editProfile'])->name('editProfile');
+    Route::put('/updateprofile', [ProfileController::class, 'updateProfile'])->name('updateProfile');
+    
+    //album
+    Route::get('/detailalbum', [AlbumController::class,'index_album'])->name('detailalbum');
 });
+
 
 

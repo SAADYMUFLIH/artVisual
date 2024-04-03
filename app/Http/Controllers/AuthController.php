@@ -25,11 +25,15 @@ class AuthController extends Controller
             'alamat' => 'required|max:255',
         ]);
 
+        $defaultImage = 'assets/profile/profile_default.jpg';
+
         $data['password'] = bcrypt($data['password']);
+        $data['image'] = $defaultImage;
+
+        // dd($data);
 
         User::create($data);
 
-        // Tampilkan SweetAlert setelah registrasi berhasil
         return back()->withInput()->with('success', 'Registrasi berhasil');
     }
   
@@ -44,17 +48,19 @@ class AuthController extends Controller
             'username' => 'required|max:255',
             'password' => 'required',
         ]);
-
+    
         if(Auth::attempt($data)){
             $request->session()->regenerate();
-            // return redirect()->route('explore');
-            return back()->withInput()->with('success', 'Login berhasil');
+            return back()->withInput()->with('success', 'Login berhasil');
         } else {
-            return back()->with('error', 'Username atau password salah.');
+            if(Auth::check()) {
+                return back()->with('error', 'Password salah.');
+            } else {
+                return back()->with('error', 'Username atau password salah.');
+            }
         }
     }
-
-
+    
     public function logout(Request $request)
     {
         Auth::logout();

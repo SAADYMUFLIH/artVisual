@@ -27,7 +27,7 @@
     </div>
 </div>
 
-<section class="section__container destination__container">
+<section class="section__container destination__container" style="margin-top: 10%">
     <div class="section__header">
         <div>
             <h2 class="section__title">Best Photo</h2>

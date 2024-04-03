@@ -76,12 +76,14 @@
 }
 
 
-.card{
-width: 60%;
-border: none;
-border-radius: 10px; 
-background-color: #fff;
+.card {
+  width: 40%;
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  height: 200px; /* Atur tinggi sesuai kebutuhan */
 }
+
 
 .stats{
   background: #f2f5f8 !important;
@@ -96,7 +98,7 @@ font-weight:500;
 }
 .followers{
   font-size:10px;
-color: #a1aab9;
+  color: #a1aab9;
 
 }
 .number2{
@@ -104,7 +106,7 @@ font-weight:500;
 }
 .rating{
   font-size:10px;
-color: #a1aab9;
+  color: #a1aab9;
 }
 .number3{
 font-weight:500;
@@ -129,6 +131,7 @@ font-weight:500;
 }
 
 
+
 .buttons button:nth-child(1){
      border:1px solid #8E24AA !important;
      color:#8E24AA;
@@ -148,6 +151,7 @@ font-weight:500;
      color:#fff;
       height:40px;
 }
+
 
 a {
   text-decoration: none;
@@ -445,9 +449,11 @@ header {
   display: flex; /* Mengatur item dalam flexbox */
   align-items: center; /* Memusatkan item secara vertikal */
   margin-bottom: 10px; /* Memberikan margin bawah antara elemen rating */
+  font-size: 16px; /* Ganti dengan ukuran yang diinginkan */
 }
 
 .rating i {
+  font-size: 16px; /* Ganti dengan ukuran yang diinginkan */
   margin-right: 10px; /* Memberikan margin kanan antara ikon dan teks rating */
 }
 .booking__price {
