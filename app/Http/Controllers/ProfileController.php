@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Album;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,10 @@ class ProfileController extends Controller
 {
     public function index_profile()
     {
-        return view('profile.profile');
+          // Mengambil semua album dari database
+        $album = Album::all();
+          
+        return view('profile.profile', compact('album'));
     }
 
     public function editProfile()
@@ -53,6 +57,6 @@ class ProfileController extends Controller
 
         $user->save();
 
-      return back()->withInput()->with('success', 'Registrasi berhasil');
+        return redirect()->route('profile')->with('success', 'Ubah Profile berhasil');
     }
 }

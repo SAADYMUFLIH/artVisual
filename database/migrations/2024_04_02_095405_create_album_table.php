@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('nama_album');
             $table->string('desc');
+            $table->string('photo');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

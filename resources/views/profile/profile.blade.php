@@ -25,7 +25,7 @@
 
             <div class="d-flex flex-column">
                 <span class="articles">Album</span>
-                <span class="number1">38</span>
+                <span class="number1">{{ $album->count() }}</span>
             </div>
 
             <div class="d-flex flex-column">
@@ -41,7 +41,8 @@
           </div>
         <!-- Button untuk membuka modal edit profil -->
         <div class="button mt-2 d-flex flex-row align-items-center">
-            <a class="btn btn-sm btn-outline-primary w-100" href="{{ route('editProfile') }}">Edit</a>
+            <a class="btn btn-sm btn-outline-primary w-100 mr-3" href="{{ route('editProfile') }}">Edit</a>
+            <a class="btn btn-sm btn-outline-primary w-100">Follow</a>
         </div>        
          </div>    
         </div>      
@@ -53,45 +54,63 @@
         <div class="d-flex justify-content-between align-items-center">
             <h2 class="section__title">Album Photo</h2>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <a type="button" class="btn btn-primary" href="{{ route('album') }}">
              Create album
-            </button>
+            </a>
         </div>   
         
         <div class="trip__grid">
+            @foreach($album as $albm)
             <div class="trip__card">
-                <img src="assets/trip-1.jpg" alt="trip" />
+                <img src="{{ asset('storage/' . $albm->photo) }}" alt="Album Image" style="height: 230px; width: 400px;" />
                 <div class="trip__details">
-                    <p>Wasserwerk Frelberg, Germany</p>
+                    <p>{{ $albm->nama_album }}</p>
                     <div style="color: #808080; font-size: 14px;">
-                        <p>ini adalah deskripsi</p>
+                        <p>{{ $albm->desc }}</p>
                     </div>
-                    <button type="button" onclick="window.location.href='{{ route('detailalbum') }}'" class="btn btn-primary">Lihat</button>  
+                    <div class="button mt-2 mx-1 d-flex flex-row align-items-center">
+                        <a class="btn btn-sm btn-outline-primary mx-1 w-50" href="{{ route('detailalbum')}}">Lihat</a>
+                        <a class="btn btn-sm btn-outline-success mx-1 w-50" href="#">Edit</a>
+                        <form action="{{ route('hapusAlbum', $albm->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-outline-danger mx-1 w-200">Hapus</button>
+                        </form>
+                    </div>
+                                 
                 </div>
             </div>
-
-            <div class="trip__card">
-                <img src="assets/trip-2.jpg" alt="trip" />
-                <div class="trip__details">
-                    <p>Patagonia, Argentina and Chile</p>
-                    <div style="color: #808080; font-size: 14px;">
-                        <p>ini adalah deskripsi</p>
-                    </div>
-                    <button type="button" onclick="window.location.href='{{ route('detailalbum') }}'" class="btn btn-primary">Lihat</button>  
-                </div>
-            </div>
-
-            <div class="trip__card">
-                <img src="assets/trip-3.jpg" alt="trip" />
-                <div class="trip__details">
-                    <p>The Dolomites, Italy</p>
-                    <div style="color: #808080; font-size: 14px;">
-                        <p>ini adalah deskripsi</p>
-                    </div>
-                    <button type="button" onclick="window.location.href='{{ route('detailalbum') }}'" class="btn btn-primary">Lihat</button>  
-                </div>
-            </div>
+            @endforeach
+        </div>
+        
+            
         </div>
     </section>
 </div>
+@endsection
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if (session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: '{{ session('error') }}',
+    });
+</script>
+@endif
+@if (session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '{{ session('success') }}',
+        showConfirmButton: false,
+        timer: 1000 // Tampilkan pesan sukses selama 2 detik
+    }).then(() => {
+        window.location.href = '/explore';
+    });
+</script>
+@endif
 @endsection

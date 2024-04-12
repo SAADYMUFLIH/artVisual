@@ -75,7 +75,15 @@
     // Misalnya:
     // addNewDestination('assets/destination-5.jpg', 'New Destination', 'New Country');
 
-     
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var imagePreview = document.getElementById('image_preview');
+            imagePreview.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
 
 
 

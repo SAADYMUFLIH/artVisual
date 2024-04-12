@@ -17,7 +17,8 @@
                 <div class="row">
                     <div class="col-md-6 mb-3 h-100">
                         <label for="image" class="form-label">Pilih Gambar:</label>
-                        <input type="file" class="form-control" id="image" style="height: 175px;" name="image" accept="image/*" required>
+                        <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                        <img id="imagePreview" src="#" alt="Priview Gambar" style="display: none; max-height: 190px;">
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
@@ -44,4 +45,23 @@
     </div>
 </div>
 
+<script>
+    const inputImage = document.getElementById('image');
+    const imagePreview = document.getElementById('imagePreview');
+
+    inputImage.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                imagePreview.src = reader.result;
+                imagePreview.style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.src = "#";
+            imagePreview.style.display = 'none';
+        }
+    });
+</script>
 @endsection

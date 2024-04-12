@@ -45,6 +45,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('/updateprofile', [ProfileController::class, 'updateProfile'])->name('updateProfile');
     
     //album
+    Route::get('/album',[AlbumController::class,'index_create'])->name('album');
+    Route::post('/albumcreate',[AlbumController::class,'create_album'])->name('createAlbum');
+    Route::delete('/albums/{id}', [AlbumController::class, 'hapus_album'])->name('hapusAlbum');
     Route::get('/detailalbum', [AlbumController::class,'index_album'])->name('detailalbum');
 });
 
