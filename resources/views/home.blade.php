@@ -81,53 +81,43 @@
                 <img src="assets/trip-1.jpg" alt="trip" />
                 <div class="trip__details">
                     <p>Wasserwerk Frelberg, Germany</p>
-                        <div class="rating">
-                          <i class="ri-thumb-up-line"></i> 4.2
-                        </div>
                 </div>
             </div>
             <div class="trip__card">
                 <img src="assets/trip-2.jpg" alt="trip" />
                 <div class="trip__details">
                     <p>Patagonia, Argentina and Chile</p>
-                    <div class="rating">
-                        <i class="ri-thumb-up-line"></i> 4.5
-                    </div>
                 </div>
             </div>
             <div class="trip__card">
                 <img src="assets/trip-3.jpg" alt="trip" />
                 <div class="trip__details">
                     <p>The Dolomites, Italy</p>
-                    <div class="rating"><i class="ri-thumb-up-line"></i> 4.7</div>
                 </div>
             </div>
               <div class="trip__card">
                 <img src="assets/trip-1.jpg" alt="trip" />
                 <div class="trip__details">
                     <p>Wasserwerk Frelberg, Germany</p>
-                    <div class="rating"><i class="ri-thumb-up-line"></i> 4.2</div>
                 </div>
             </div>
             <div class="trip__card">
                 <img src="assets/trip-2.jpg" alt="trip" />
                 <div class="trip__details">
                     <p>Patagonia, Argentina and Chile</p>
-                    <div class="rating"><i class="ri-thumb-up-line"></i> 4.5</div>
                 </div>
             </div>
             <div class="trip__card">
                 <img src="assets/trip-3.jpg" alt="trip" />
                 <div class="trip__details">
                     <p>The Dolomites, Italy</p>
-                    <div class="rating"><i class="ri-thumb-up-line"></i> 4.7</div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="gallary">
+{{-- <section class="gallary">
     <div class="section__container gallary__container">
         <div class="image__gallary">
             <div class="gallary__col">
@@ -150,7 +140,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 
 

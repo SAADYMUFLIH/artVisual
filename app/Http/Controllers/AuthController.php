@@ -60,6 +60,13 @@ class AuthController extends Controller
             }
         }
     }
+
+
+    //admin 
+    public function adminLogin()
+    {
+        return view('admin.login.login');
+    }
     
     public function logout(Request $request)
     {

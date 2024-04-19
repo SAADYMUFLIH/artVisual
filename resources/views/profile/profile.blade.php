@@ -25,12 +25,21 @@
 
             <div class="d-flex flex-column">
                 <span class="articles">Album</span>
-                <span class="number1">{{ $album->count() }}</span>
+                @if(auth()->check() && auth()->user()->albums)
+                 <span class="number1">{{ auth()->user()->albums->count() }}</span>
+                @else
+                 <span class="number1">0</span>
+                @endif
             </div>
 
             <div class="d-flex flex-column">
                 <span class="followers">Photo</span>
-                <span class="number2">980</span>
+                @if(auth()->check() && auth()->user()->foto)
+                <span class="number2">{{ auth()->user()->foto->count() }}</span>
+            @else
+                <span class="number2">0</span>
+            @endif
+            
             </div>
 
             <div class="d-flex flex-column">
@@ -42,7 +51,7 @@
         <!-- Button untuk membuka modal edit profil -->
         <div class="button mt-2 d-flex flex-row align-items-center">
             <a class="btn btn-sm btn-outline-primary w-100 mr-3" href="{{ route('editProfile') }}">Edit</a>
-            <a class="btn btn-sm btn-outline-primary w-100">Follow</a>
+            {{-- <a class="btn btn-sm btn-outline-primary w-100">Follow</a> --}}
         </div>        
          </div>    
         </div>      
@@ -53,11 +62,17 @@
     <section class="trip" style="padding-left: 50px; padding-right: 50px;" >
         <div class="d-flex justify-content-between align-items-center">
             <h2 class="section__title">Album Photo</h2>
-            <!-- Button trigger modal -->
-            <a type="button" class="btn btn-primary" href="{{ route('album') }}">
-             Create album
-            </a>
-        </div>   
+            <div class="d-flex">
+                <!-- Button trigger modal -->
+                <a type="button" href="{{ route('exportAlbumToExcel') }}" class="btn btn-outline-success" style="margin-right: 5px;" href="#">
+                    Export excel
+                </a>
+                <a type="button" class="btn btn-primary me-2" href="{{ route('album') }}">
+                    Create album
+                </a>
+            </div>
+        </div>
+         
         
         <div class="trip__grid">
             @foreach($album as $albm)
@@ -69,8 +84,8 @@
                         <p>{{ $albm->desc }}</p>
                     </div>
                     <div class="button mt-2 mx-1 d-flex flex-row align-items-center">
-                        <a class="btn btn-sm btn-outline-primary mx-1 w-50" href="{{ route('detailalbum')}}">Lihat</a>
-                        <a class="btn btn-sm btn-outline-success mx-1 w-50" href="#">Edit</a>
+                        <a class="btn btn-sm btn-outline-primary mx-1 w-50" href="{{ route('detailalbum', $albm->id) }}">Lihat</a>
+                        {{-- <a class="btn btn-sm btn-outline-success mx-1 w-50" href="#">Edit</a> --}}
                         <form action="{{ route('hapusAlbum', $albm->id) }}" method="POST">
                             @csrf
                             @method('DELETE')

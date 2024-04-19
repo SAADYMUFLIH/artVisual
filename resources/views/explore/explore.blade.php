@@ -18,84 +18,33 @@
             </p>
     
             <div class="container-fluid">
-                <form class="d-flex">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button type="button" class="btn btn-outline-primary">Search</button>
+                <form class="d-flex" action="{{ route('users.search')}}" method="GET">
+                    <input id="search" name="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 </form>
             </div>
-           
-                <div class="trip__grid">
-                  <div class="trip__card">
-                    <img src="assets/trip-1.jpg" alt="trip" />
-                    <div class="trip__details">
-                        <p>Wasserwerk Frelberg, Germany</p>
-                        <div class="rating">
-                            <span><i class="ri-thumb-up-line"></i>10</span> <!-- Angka rating -->
-                            <span style="margin-right: 10px;"></span> <!-- Spasi -->
-                            <i class="ri-chat-3-line"> 4 rb</i> <!-- Ikon untuk komentar -->
-                        </div>    
-                    </div>
-                </div>
 
-                <div class="trip__card">
-                    <img src="assets/trip-2.jpg" alt="trip" />
-                    <div class="trip__details">
-                        <p>Patagonia, Argentina and Chile</p>
-                        <div class="rating">
-                            <span><i class="ri-thumb-up-line"></i>10</span> <!-- Angka rating -->
-                            <span style="margin-right: 10px;"></span> <!-- Spasi -->
-                            <i class="ri-chat-3-line"> 4 rb</i> <!-- Ikon untuk komentar -->
-                        </div>   
-                    </div>
-                </div>
-
-                <div class="trip__card">
-                    <img src="assets/trip-3.jpg" alt="trip" />
-                    <div class="trip__details">
-                        <p>The Dolomites, Italy</p>
-                        <div class="rating">
-                            <span><i class="ri-thumb-up-line"></i>10</span> <!-- Angka rating -->
-                            <span style="margin-right: 10px;"></span> <!-- Spasi -->
-                            <i class="ri-chat-3-line"> 4 rb</i> <!-- Ikon untuk komentar -->
-                        </div>   
-                    </div>
-                </div>
-                  <div class="trip__card">
-                    <img src="assets/trip-1.jpg" alt="trip" />
-                    <div class="trip__details">
-                        <p>Wasserwerk Frelberg, Germany</p>
-                        <div class="rating">
-                            <span><i class="ri-thumb-up-line"></i>10</span> <!-- Angka rating -->
-                            <span style="margin-right: 10px;"></span> <!-- Spasi -->
-                            <i class="ri-chat-3-line"> 4 rb</i> <!-- Ikon untuk komentar -->
-                        </div>   
-                    </div>
-                </div>
-                <div class="trip__card">
-                    <img src="assets/trip-2.jpg" alt="trip" />
-                    <div class="trip__details">
-                        <p>Patagonia, Argentina and Chile</p>
-                        <div class="rating">
-                            <span><i class="ri-thumb-up-line"></i>10</span> <!-- Angka rating -->
-                            <span style="margin-right: 10px;"></span> <!-- Spasi -->
-                            <i class="ri-chat-3-line"> 4 rb</i> <!-- Ikon untuk komentar -->
-                        </div>   
-                    </div>
-                </div>
-                <div class="trip__card">
-                    <img src="assets/trip-3.jpg" alt="trip" />
-                    <div class="trip__details">
-                        <p>The Dolomites, Italy</p>
-                        <div class="rating">
-                            <span><i class="ri-thumb-up-line"></i>10</span> <!-- Angka rating -->
-                            <span style="margin-right: 10px;"></span> <!-- Spasi -->
-                            <i class="ri-chat-3-line"> 4 rb</i> <!-- Ikon untuk komentar -->
-                        </div>   
-                    </div>
-                </div>
+            <div id="search_list">
+                
             </div>
+            
+            <div class="trip__grid" id="photo-grid">
+                @foreach($photos as $photo)
+                <div class="trip__card">
+                    <a href="{{ route('showFoto', ['id' => $photo->id]) }}">
+                        <img src="{{ asset('storage/' . $photo->file_foto) }}" alt="{{ $photo->judul_foto }}" style="height: 230px; width: 400px;" />
+                    </a>                    
+                    
+                    <div class="trip__details">
+                        <p>{{ $photo->judul_foto }}</p>
+                        <p style="font-size: 14px">{{ $photo->desc }}</p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            
         </div>
     </section>
 </div>
+
 
 @endsection

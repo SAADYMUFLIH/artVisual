@@ -21,6 +21,7 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 |
 */
 
+//user
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -31,24 +32,48 @@ Route::post('/register', [AuthController::class, 'registerStore'])->name('regist
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+//admin
+Route::get('/admin', [AuthController::class, 'adminLogin'])->name('admin.login');
+
+
 //explore
 Route::get('/explore', [ExploreController::class, 'index_explore'])->name('explore');
+Route::get('/exploreSearch', [ExploreController::class, 'search'])->name('users.search');
+
 
 //upload
 Route::group(['middleware' => 'auth'], function() {
+
+
+
+    //detail foto
+    Route::get('/detailfoto/{id}', [ExploreController::class, 'show_foto'])->name('showFoto');
+    Route::post('/komentarfoto', [ExploreController::class, 'storeKomentar'])->name('storeKomentar');
+    
+    //like
+    Route::post('/likefoto', [ExploreController::class, 'like'])->name('likeFoto');
+
     //upload
     Route::get('/upload', [UploadController::class, 'index_upload'])->name('upload');
+    Route::post('/uploadFoto', [UploadController::class, 'uploadFoto'])->name('uploadFoto');
+   
 
     //profile
     Route::get('/profile', [ProfileController::class, 'index_profile'])->name('profile');
     Route::get('/editprofile', [ProfileController::class, 'editProfile'])->name('editProfile');
     Route::put('/updateprofile', [ProfileController::class, 'updateProfile'])->name('updateProfile');
+    Route::get('/detailalbum/{id}', [ProfileController::class,'show_album'])->name('detailalbum');
     
     //album
     Route::get('/album',[AlbumController::class,'index_create'])->name('album');
     Route::post('/albumcreate',[AlbumController::class,'create_album'])->name('createAlbum');
     Route::delete('/albums/{id}', [AlbumController::class, 'hapus_album'])->name('hapusAlbum');
-    Route::get('/detailalbum', [AlbumController::class,'index_album'])->name('detailalbum');
+    Route::delete('/album/delete-photo/{id}', [AlbumController::class, 'deletePhoto'])->name('deletePhoto');
+
+    //export album
+    Route::get('export-albums', [AlbumController::class, 'exportAlbumToExcel'])->name('exportAlbumToExcel');
+    
+    
 });
 
 

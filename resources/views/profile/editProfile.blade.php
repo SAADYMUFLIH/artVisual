@@ -17,25 +17,25 @@
                 <div class="row">
                     <div class="col-md-6 mb-3 h-100">
                         <label for="image" class="form-label">Pilih Gambar:</label>
-                        <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                        <input type="file" class="form-control" id="image" name="image" accept="image/*" >
                         <img id="imagePreview" src="#" alt="Priview Gambar" style="display: none; max-height: 190px;">
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" required>
+                            <input type="text" class="form-control" id="username" name="username">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="email" class="form-control" id="email" name="email" >
                         </div>
                         <div class="mb-3">
                             <label for="full_name" class="form-label">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="full_name" name="nama_lengkap" required>
+                            <input type="text" class="form-control" id="full_name" name="nama_lengkap" >
                         </div>
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat</label>
-                            <input type="text" class="form-control" id="alamat" name="alamat" required>
+                            <input type="text" class="form-control" id="alamat" name="alamat" >
                         </div>
                     </div>
                 </div>
@@ -64,4 +64,5 @@
         }
     });
 </script>
+
 @endsection

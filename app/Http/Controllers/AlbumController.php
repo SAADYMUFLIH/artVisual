@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Foto;
+use App\Models\User;
 use App\Models\Album;
 use Illuminate\Http\Request;
+use App\Exports\AlbumsExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class AlbumController extends Controller
 {
-    public function index_album()
-    {
-        return view('album.detailalbum');
-    }
-
     public function index_create()
     {
         return view('album.createalbum');
@@ -56,4 +56,39 @@ class AlbumController extends Controller
         // Redirect pengguna ke halaman yang sesuai setelah foto berhasil disimpan
         return redirect()->route('profile')->with('success', 'Album Delete successfully.');
     }
+
+    public function exportAlbumToExcel()
+    {
+        // Dapatkan nama pengguna dari pengguna yang saat ini login
+        $username = auth()->user()->username;
+
+        // Dapatkan ID pengguna dari nama pengguna
+        $userId = User::where('username', $username)->value('id');
+
+        // Dapatkan data album yang dimiliki oleh pengguna dengan ID yang diperoleh
+        $albums = Album::where('user_id', $userId)->get();
+
+        // Tambahkan kolom baru "username" ke setiap item album
+        foreach ($albums as $album) {
+            $album->username = $username;
+        }
+
+        // Ekspor data album ke dalam file Excel
+        return Excel::download(new AlbumsExport($albums), 'albums.xlsx');
+    }
+
+
+    public function deletePhoto($id)
+    {
+        // Temukan foto berdasarkan ID
+        $foto = Foto::findOrFail($id);
+
+        // Hapus foto dari database
+        $foto->delete();
+
+        // Redirect atau kembali ke halaman album
+        return redirect()->route('profile')->with('success', 'Foto berhasil dihapus dari album.');
+    }
+
+
 }

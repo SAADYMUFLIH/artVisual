@@ -16,11 +16,19 @@ class ProfileController extends Controller
 {
     public function index_profile()
     {
-          // Mengambil semua album dari database
-        $album = Album::all();
-          
-        return view('profile.profile', compact('album'));
+        // Mengambil semua album dari database
+        $user = auth()->user();
+        $album = $user->albums;
+    
+        // Pastikan $albums bukan null sebelum digunakan
+        if ($album) {
+            return view('profile.profile', compact('album', 'user'));
+        } else {
+            // Jika $albums null, berikan pesan atau tindakan lain sesuai kebutuhan
+            return view('profile.profile')->with('error', 'Tidak ada album yang tersedia.');
+        }
     }
+    
 
     public function editProfile()
     {
@@ -58,5 +66,16 @@ class ProfileController extends Controller
         $user->save();
 
         return redirect()->route('profile')->with('success', 'Ubah Profile berhasil');
+    }
+
+    public function show_album(Album $album ,$id)
+    {
+        $user = auth()->user();
+        $album = Album::findOrFail($id);
+        if ($album->user_id !== $user->id){
+            'dsad';
+        }
+        $photos = $album->foto;
+        return view('album.detailalbum', compact('user', 'album', 'photos'));
     }
 }
