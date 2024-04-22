@@ -61,13 +61,6 @@ class AuthController extends Controller
         }
     }
 
-
-    //admin 
-    public function adminLogin()
-    {
-        return view('admin.login.login');
-    }
-    
     public function logout(Request $request)
     {
         Auth::logout();
@@ -76,4 +69,55 @@ class AuthController extends Controller
 
         return redirect()->route('home')->with('success', 'You have been logged out!');
     }
+
+
+    //admin 
+    public function adminLogin()
+    {
+        return view('admin.login.login');
+    }
+
+    public function adminLoginStore(Request $request)
+    {
+        $credentials = $request->only('username', 'password');
+
+        if (Auth::attempt($credentials)) {
+            // Otentikasi berhasil, periksa apakah pengguna adalah admin
+            if (Auth::user()->isAdmin()) {
+                // Jika pengguna adalah admin, arahkan ke dashboard admin
+                return redirect()->route('admin.dashboard');
+            } else {
+                // Jika pengguna bukan admin, arahkan kembali ke halaman login dengan pesan kesalahan
+                return redirect()->route('admin.login.login')->with('error', 'Anda bukan admin.');
+            }
+        }
+
+        // Otentikasi gagal, arahkan kembali ke halaman login dengan pesan kesalahan
+        return redirect()->route('admin.login')->with('error', 'Username atau password salah.');
+    }
+
+     
+    public function dashboard()
+    {
+        // Pastikan hanya admin yang bisa mengakses halaman dashboard
+        if (!Auth::user()->isAdmin()) {
+            return redirect()->route('admin.login')->with('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+        }
+
+        // Jika admin, arahkan ke halaman dashboard admin
+        return view('admin.dashboard.dashboard');
+    }
+
+    public function adminLogout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('home')->with('success', 'You have been logged out!');
+    }
+
+    
+    
 }

@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('password');
             $table->string('email')->unique();
             $table->string('image')->nullable()->default('assets/profile/profile_default.jpg');
-            $table->string('nama_lengkap');
-            $table->string('alamat');
+            $table->string('nama_lengkap')->nullable();
+            $table->string('alamat')->nullable();
+            
             $table->rememberToken();
             $table->timestamps();
 

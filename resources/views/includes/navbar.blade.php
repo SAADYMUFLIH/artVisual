@@ -32,6 +32,7 @@
             </form>
             @else
             <li class="nav-item">
+                <button class="btn btn-primary" onclick="window.location.href='{{ route('admin.login') }}'">Login Admin</button>
                 <button class="btn btn-primary" onclick="window.location.href='{{ route('login') }}'">Login</button>
             </li>
             @endif
@@ -59,4 +60,15 @@
         });
     }
 </script>
+
+{{-- <script>
+    // Aktifkan dropdown pada saat dokumen dimuat
+    document.addEventListener("DOMContentLoaded", function() {
+        var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+        var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+            return new bootstrap.Dropdown(dropdownToggleEl)
+        })
+    });
+</script> --}}
+
 @endsection

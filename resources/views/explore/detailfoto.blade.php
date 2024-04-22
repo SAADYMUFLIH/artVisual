@@ -221,23 +221,24 @@
 
 <div class="Instagram-card" style="margin-top: 2rem;">
     <div class="Instagram-card-image">
-        <img id="foto_{{ $foto->id }}" src="{{ asset('storage/' . $foto->file_foto) }}" height="500px"
+        <img id="foto_{{ $foto->id }}" src="{{ asset('storage/' . $foto->file_foto) }}" height="450px"
             style="width: 450px; cursor: pointer;"
             onclick="showFullImage('{{ asset('storage/' . $foto->file_foto) }}', 'foto_{{ $foto->id }}')">
     </div>
     
-
     <div class="Instagram-card-content">
         <div class="Instagram-card-header">
             @if ($userName)
                     <img src="{{ $userProfileImage ? asset($userProfileImage) : asset('images/default_profile.jpg') }}"
                         alt="Profile Image" class="Instagram-card-user-image"
                         onclick="showFullImage('{{ $userProfileImage ? asset($userProfileImage) : asset('images/default_profile.jpg') }}')">
-                    <a class="Instagram-card-user-name" href="https://www.instagram.com/{{ $userName }}">
-                        {{ $userName }}
-                    </a>
-                    <div class="Instagram-card-time"> 1 sem </div>
+                       
+                        <a class="Instagram-card-user-name" href="{{ route('showUserProfile', ['username' => $user->username]) }}">
+                            {{ $user->username }}
+                        </a>                        
+                        
             @endif
+
         </div>
         <p class="Likes" style="margin-top: 2rem;">{{ $foto->judul_foto }}</p>
         <p>
@@ -245,7 +246,44 @@
             </a>
             {{ $foto->desc}}
         </p>
-        <p class="comments">{{ count($komentar) }} coments</p>
+        <div style="display: flex; flex-direction: row;">
+            <p class="comments">{{ count($komentar) }} comments</p>
+            
+            @if(Auth::user() && $foto->user_id !== Auth::user()->id)
+                <a type="button" class="nav-link active"  style="margin-left: auto; color:red;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Laporkan
+                </a>
+            @endif
+        </div>
+       <!-- Button trigger modal -->
+  
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Report Photo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('laporFoto', ['foto_id' => $foto->id]) }}" method="POST">
+                        @csrf
+                        <label for="exampleFormControlSelect1">Report</label>
+                        <select class="form-control" id="exampleFormControlSelect1" name="report_id">
+                            <option>-- Pilih Tipe Laporan --</option>
+                            @foreach ($reports as $report)
+                                <option value="{{ $report->id }}">{{ $report->report_type }}</option>
+                            @endforeach
+                        </select>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+            </div>
+            </div>
+        </div>
         <hr>
         <div class="komentar-list" style="max-height: 200px; overflow-y: auto;">
             @foreach($komentar as $komen)
@@ -281,14 +319,17 @@
                 <input class="comments-input" type="text" name="isi_komentar" placeholder="Tambahkan komentar...">
                 <button type="submit">Kirim</button>
             </form>
-        
-            <a class="footer-action-icons" href="#"><i class="fa fa-ellipsis-h"></i></a>
           </div>   
         </div>
-    </div>
-
-
-        
+      </div>
     </div>
 </div>
+
 @endsection
+<!-- JavaScript untuk menampilkan modal -->
+<script>
+    document.getElementById("laporkan").addEventListener("click", function() {
+        var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+        myModal.show();
+    });
+</script>

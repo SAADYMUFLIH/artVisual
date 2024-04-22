@@ -16,10 +16,9 @@ class AlbumsExport implements FromCollection, WithHeadings, WithStyles
     */
     public function collection()
     {
-        // Dapatkan data album yang dimiliki oleh pengguna yang saat ini login
-        $userId = auth()->id();
-        $albums = Album::where('user_id', $userId)->get();
-
+        // Dapatkan semua data album
+        $albums = Album::all();
+    
         // Ubah data album menjadi array untuk diekspor
         $data = [];
         foreach ($albums as $album) {
@@ -31,11 +30,11 @@ class AlbumsExport implements FromCollection, WithHeadings, WithStyles
                 'Photo' => $album->photo,
             ];
         }
-
+    
         // Kembalikan koleksi data yang akan diekspor
         return collect($data);
     }
-
+    
     public function headings(): array
     {
         return [

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('file_foto');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('album_id');
+            $table->integer('reports_count')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

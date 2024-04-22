@@ -164,7 +164,7 @@
                 <div class="overlay">
                     <h2 class="card-title title">{{ $foto->judul_foto}}</h2>
                     <div class="more">
-                        <form id="deleteForm" action="{{ route('deletePhoto', ['foto_id' => $foto->id]) }}" method="POST" style="display: inline;">
+                        <form id="deleteForm" action="{{ route('deletePhoto', ['id' => $foto->id]) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">

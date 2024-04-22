@@ -59,19 +59,8 @@ class AlbumController extends Controller
 
     public function exportAlbumToExcel()
     {
-        // Dapatkan nama pengguna dari pengguna yang saat ini login
-        $username = auth()->user()->username;
-
-        // Dapatkan ID pengguna dari nama pengguna
-        $userId = User::where('username', $username)->value('id');
-
-        // Dapatkan data album yang dimiliki oleh pengguna dengan ID yang diperoleh
-        $albums = Album::where('user_id', $userId)->get();
-
-        // Tambahkan kolom baru "username" ke setiap item album
-        foreach ($albums as $album) {
-            $album->username = $username;
-        }
+        // Dapatkan semua data album
+        $albums = Album::all();
 
         // Ekspor data album ke dalam file Excel
         return Excel::download(new AlbumsExport($albums), 'albums.xlsx');
@@ -88,6 +77,12 @@ class AlbumController extends Controller
 
         // Redirect atau kembali ke halaman album
         return redirect()->route('profile')->with('success', 'Foto berhasil dihapus dari album.');
+    }
+
+    public function dataAlbum()
+    {
+        $albums = Album::all();
+        return view('admin.album.dataalbum' ,compact('albums'));
     }
 
 

@@ -9,7 +9,7 @@ class Foto extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['judul_foto', 'desc', 'foto', 'user_id','album_id'];
+    protected $fillable = ['judul_foto', 'desc', 'foto', 'user_id','album_id','reports_count'];
 
     protected $table = 'foto';
 
@@ -37,5 +37,10 @@ class Foto extends Model
     {
         $user = auth()->user();
         return $user ? $this->like()->where('user_id', $user->id)->exists() : false;
+    }
+
+    public function reports()
+    {
+        return $this->belongsToMany(Report::class);
     }
 }

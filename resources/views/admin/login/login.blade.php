@@ -1,58 +1,50 @@
-@extends('auth.layout')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@yield('title')</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-@section('title', 'Login')
+  <link rel="stylesheet" href="css/stylelogin.css">
 
-@section('content')
-<form class="login-form" method="POST">
-    @csrf
-    <h2 class="text-center mb-4">Login</h2>
-    <div class="form-group">
-        <input type="text" class="form-control rounded" value="{{old('username')}}" name="username"
-            placeholder="Username">
-        @if ( count($errors) > 0)
-        <div style="width: auto; color:red; margin-top: 0.25rem;">
-            {{ $errors->first('username') }}
+   <!-- SweetAlert CDN --> 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+<body>     
+    <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <form class="login-form" method="POST" action="{{ route('admin.login.store') }}">
+                @csrf
+                <h2 class="text-center mb-4">Login</h2>
+                <div class="form-group">
+                    <input type="text" class="form-control rounded" value="{{ old('username') }}" name="username" placeholder="Username">
+                    @error('username')
+                    <div style="width: auto; color:red; margin-top: 0.25rem;">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control rounded" value="{{ old('password') }}" name="password" placeholder="Password">
+                    @error('password')
+                    <div style="width: auto; color:red; margin-top: 0.25rem;">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+          </div>
         </div>
-        @endif
-    </div>
-    <div class="form-group">
-        <input type="password" class="form-control rounded" value="{{old('passwrd')}}" name="password"
-            placeholder="Password">
-        @if ( count($errors) > 0)
-        <div style="width: auto; color:red; margin-top: 0.25rem;">
-            {{ $errors->first('password') }}
-        </div>
-        @endif
-    </div>
-    <button type="submit" class="btn btn-primary btn-block">Login</button>
-    {{-- <div class="text-center mt-3">
-        <p>Don't have an account? <a href="{{ route('register') }}">Register</a></p>
-    </div> --}}
-</form>
-@endsection
+      </div>
 
-@section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@if (session('error'))
-<script>
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: '{{ session('error') }}',
-    });
-</script>
-@endif
-@if (session('success'))
-<script>
-    Swal.fire({
-        icon: 'success',
-        title: 'Success!',
-        text: '{{ session('success') }}',
-        showConfirmButton: false,
-        timer: 1000 // Tampilkan pesan sukses selama 2 detik
-    }).then(() => {
-        window.location.href = '/';
-    });
-</script>
-@endif
-@endsection
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- SweetAlert Script -->
+    @yield('scripts')
+</body>
+</html>

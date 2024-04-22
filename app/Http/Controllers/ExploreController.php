@@ -6,7 +6,9 @@ use App\Models\Foto;
 use App\Models\Like;
 use App\Models\User;
 use App\Models\Album;
+use App\Models\Report;
 use App\Models\Komentar;
+use App\Models\ReportPhoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,6 +32,7 @@ class ExploreController extends Controller
     public function show_foto($id)
     {
         $foto = Foto::findOrFail($id);
+        $reports = Report::all();
 
         if ($foto->album) {
             $user = $foto->album->user;
@@ -42,7 +45,7 @@ class ExploreController extends Controller
 
         $komentar = $foto->komentar;
         
-        return view('explore.detailfoto', compact('foto', 'user','userName', 'userProfileImage','komentar'));
+        return view('explore.detailfoto', compact('foto', 'user','userName', 'userProfileImage','komentar','reports'));
     }
 
     public function storeKomentar(Request $request)
@@ -89,5 +92,24 @@ class ExploreController extends Controller
         return redirect()->back()->with('success', $message);
     }
 
+    public function laporFoto(Request $request, $foto_id) 
+    {
+        $request->validate([
+            'report_id' => 'required|exists:reports,id', // Pastikan report_id yang dikirimkan valid
+        ]);
+
+        // Dapatkan report berdasarkan report_id yang dipilih
+        $report = Report::findOrFail($request->report_id);
+
+        $reportPhoto = new ReportPhoto();
+        $reportPhoto->foto_id = $foto_id;
+        $reportPhoto->keterangan = $report->report_type; // Isi keterangan dengan report_type
+        $reportPhoto->save();
+
+        return redirect()->back()->with('success', 'Foto telah ditambahkan ke laporan.');
+    }
+
+    
+    
     
 }
