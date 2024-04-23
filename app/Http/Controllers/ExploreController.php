@@ -95,7 +95,7 @@ class ExploreController extends Controller
     public function laporFoto(Request $request, $foto_id) 
     {
         $request->validate([
-            'report_id' => 'required|exists:reports,id', // Pastikan report_id yang dikirimkan valid
+            'report_id' => 'required|exists:reports,id',
         ]);
 
         // Dapatkan report berdasarkan report_id yang dipilih
@@ -103,13 +103,9 @@ class ExploreController extends Controller
 
         $reportPhoto = new ReportPhoto();
         $reportPhoto->foto_id = $foto_id;
-        $reportPhoto->keterangan = $report->report_type; // Isi keterangan dengan report_type
+        $reportPhoto->keterangan = $report->report_type; 
         $reportPhoto->save();
 
         return back()->withInput()->with('success', 'Foto Berhasil Di laporkan');
     }
-
-    
-    
-    
 }

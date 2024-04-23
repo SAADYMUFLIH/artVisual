@@ -49,17 +49,21 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
     
-        if(Auth::attempt($data)){
+        if (Auth::attempt($data)) {
             $request->session()->regenerate();
-            return back()->withInput()->with('success', 'Login berhasil');
-        } else {
-            if(Auth::check()) {
-                return back()->with('error', 'Password salah.');
+    
+            // Cek apakah pengguna adalah admin atau bukan
+            if (Auth::user()->isAdmin()) {
+                return redirect()->route('admin.dashboard'); // Mengarahkan ke dashboard admin
             } else {
-                return back()->with('error', 'Username atau password salah.');
+                return redirect()->route('explore'); // Mengarahkan ke dashboard admin
             }
+        } else {
+            // Tampilkan pesan kesalahan jika autentikasi gagal
+            return back()->with('error', 'Username atau password salah.');
         }
     }
+    
 
     public function logout(Request $request)
     {
@@ -67,34 +71,34 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('home')->with('success', 'You have been logged out!');
+        return redirect()->route('explore')->with('success', 'You have been logged out!');
     }
 
 
-    //admin 
-    public function adminLogin()
-    {
-        return view('admin.login.login');
-    }
+    // //admin 
+    // public function adminLogin()
+    // {
+    //     return view('admin.login.login');
+    // }
 
-    public function adminLoginStore(Request $request)
-    {
-        $credentials = $request->only('username', 'password');
+    // public function adminLoginStore(Request $request)
+    // {
+    //     $credentials = $request->only('username', 'password');
 
-        if (Auth::attempt($credentials)) {
-            // Otentikasi berhasil, periksa apakah pengguna adalah admin
-            if (Auth::user()->isAdmin()) {
-                // Jika pengguna adalah admin, arahkan ke dashboard admin
-                return redirect()->route('admin.dashboard');
-            } else {
-                // Jika pengguna bukan admin, arahkan kembali ke halaman login dengan pesan kesalahan
-                return redirect()->route('admin.login.login')->with('error', 'Anda bukan admin.');
-            }
-        }
+    //     if (Auth::attempt($credentials)) {
+    //         // Otentikasi berhasil, periksa apakah pengguna adalah admin
+    //         if (Auth::user()->isAdmin()) {
+    //             // Jika pengguna adalah admin, arahkan ke dashboard admin
+    //             return redirect()->route('admin.dashboard');
+    //         } else {
+    //             // Jika pengguna bukan admin, arahkan kembali ke halaman login dengan pesan kesalahan
+    //             return redirect()->route('admin.login.login')->with('error', 'Anda bukan admin.');
+    //         }
+    //     }
 
-        // Otentikasi gagal, arahkan kembali ke halaman login dengan pesan kesalahan
-        return redirect()->route('admin.login')->with('error', 'Username atau password salah.');
-    }
+    //     // Otentikasi gagal, arahkan kembali ke halaman login dengan pesan kesalahan
+    //     return redirect()->route('admin.login')->with('error', 'Username atau password salah.');
+    // }
 
      
     public function dashboard()
@@ -108,15 +112,15 @@ class AuthController extends Controller
         return view('admin.dashboard.dashboard');
     }
 
-    public function adminLogout(Request $request)
-    {
-        Auth::logout();
+    // public function adminLogout(Request $request)
+    // {
+    //     Auth::logout();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+    //     $request->session()->invalidate();
+    //     $request->session()->regenerateToken();
 
-        return redirect()->route('home')->with('success', 'You have been logged out!');
-    }
+    //     return redirect()->route('home')->with('success', 'You have been logged out!');
+    // }
 
     
     

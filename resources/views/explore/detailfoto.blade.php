@@ -260,30 +260,33 @@
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Report Photo</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Report Photo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('laporFoto', ['foto_id' => $foto->id]) }}" method="POST">
+                            @csrf
+                            <label for="exampleFormControlSelect1">Report</label>
+                            <ul class="list-group">
+                                @foreach ($reports as $report)
+                                    <li class="list-group-item">
+                                        <input type="radio" id="report_{{ $report->id }}" name="report_id" value="{{ $report->id }}">
+                                        <label for="report_{{ $report->id }}">{{ $report->report_type }}</label>
+                                    </li>
+                                @endforeach
+                            </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                    </form>
                 </div>
-                <div class="modal-body">
-                    <form action="{{ route('laporFoto', ['foto_id' => $foto->id]) }}" method="POST">
-                        @csrf
-                        <label for="exampleFormControlSelect1">Report</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="report_id">
-                            <option>-- Pilih Tipe Laporan --</option>
-                            @foreach ($reports as $report)
-                                <option value="{{ $report->id }}">{{ $report->report_type }}</option>
-                            @endforeach
-                        </select>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
-            </div>
             </div>
         </div>
+        
         <hr>
         <div class="komentar-list" style="max-height: 200px; overflow-y: auto;">
             @foreach($komentar as $komen)

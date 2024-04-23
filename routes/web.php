@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 */
 
 //user
-Route::get('/', [HomeController::class, 'index'])->name('home');
+
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginStore'])->name('loginPost');
@@ -33,10 +33,10 @@ Route::post('/register', [AuthController::class, 'registerStore'])->name('regist
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-//admin
-Route::get('/admin', [AuthController::class, 'adminLogin'])->name('admin.login');
-Route::post('/admin/login', [AuthController::class, 'adminLoginStore'])->name('admin.login.store');
-Route::post('/admin/logout', [AuthController::class, 'adminLogout'])->name('admin.logout');
+// //admin
+// Route::get('/admin', [AuthController::class, 'adminLogin'])->name('admin.login');
+// Route::post('/admin/login', [AuthController::class, 'adminLoginStore'])->name('admin.login.store');
+// Route::post('/admin/logout', [AuthController::class, 'adminLogout'])->name('admin.logout');
 
 Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('admin.dashboard');
@@ -55,7 +55,7 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
 
 
 //explore
-Route::get('/explore', [ExploreController::class, 'index_explore'])->name('explore');
+Route::get('/', [ExploreController::class, 'index_explore'])->name('explore');
 Route::get('/exploreSearch', [ExploreController::class, 'search'])->name('users.search');
 
 
@@ -73,7 +73,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/upload', [UploadController::class, 'index_upload'])->name('upload');
     Route::post('/uploadFoto', [UploadController::class, 'uploadFoto'])->name('uploadFoto');
    
-
     //profile
     Route::get('/profile', [ProfileController::class, 'index_profile'])->name('profile');
     Route::get('/editprofile', [ProfileController::class, 'editProfile'])->name('editProfile');

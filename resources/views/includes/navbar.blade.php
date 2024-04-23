@@ -5,9 +5,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 13%">
         <ul class="navbar-nav mx-auto">
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('home') }}">Home</a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('explore') }}">Explore</a>
             </li>
@@ -32,7 +32,6 @@
             </form>
             @else
             <li class="nav-item">
-                <button class="btn btn-primary" onclick="window.location.href='{{ route('admin.login') }}'">Login Admin</button>
                 <button class="btn btn-primary" onclick="window.location.href='{{ route('login') }}'">Login</button>
             </li>
             @endif

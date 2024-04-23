@@ -16,7 +16,7 @@
         
         <div class="topbar-divider d-none d-sm-block"></div>
 
-        <form method="POST" action="{{ route('admin.logout') }}">
+        <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit" class="btn btn-outline-primary">Logout</button>
         </form>
