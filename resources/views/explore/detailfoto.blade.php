@@ -327,9 +327,31 @@
 
 @endsection
 <!-- JavaScript untuk menampilkan modal -->
+
+
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if (session('error'))
 <script>
-    document.getElementById("laporkan").addEventListener("click", function() {
-        var myModal = new bootstrap.Modal(document.getElementById('myModal'));
-        myModal.show();
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: '{{ session('error') }}',
     });
 </script>
+@endif
+@if (session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '{{ session('success') }}',
+        showConfirmButton: false,
+        timer: 1000 // Tampilkan pesan sukses selama 2 detik
+    }).then(() => {
+        window.location.href = '/detailfoto';
+    });
+</script>
+@endif
+@endsection

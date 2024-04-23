@@ -106,7 +106,7 @@ class ExploreController extends Controller
         $reportPhoto->keterangan = $report->report_type; // Isi keterangan dengan report_type
         $reportPhoto->save();
 
-        return redirect()->back()->with('success', 'Foto telah ditambahkan ke laporan.');
+        return back()->withInput()->with('success', 'Foto Berhasil Di laporkan');
     }
 
     
